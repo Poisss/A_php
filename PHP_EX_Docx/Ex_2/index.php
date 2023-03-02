@@ -10,6 +10,7 @@
     <?php
         if(empty($_POST)){   
     ?>
+    <form action="" method="post">
         <h1>Интернет_пакет</h1>
         <P >Минуты:</P>
         <input type="number" min="0" max="2000" name="min" required>
@@ -20,21 +21,57 @@
         <input type="checkbox"  name="sms" >  
         <h2>Приложения</h2> 
         <P >Telegram</P>
-        <input type="checkbox"  name="col_draw" >
+        <input type="checkbox"  name="app[]" value="Telegram">
         <P >WhatsApp</P>
-        <input type="checkbox"  name="col_draw" >  
+        <input type="checkbox"  name="app[]" value="WhatsApp">  
         <P >Viber</P>
-        <input type="checkbox"  name="col_draw" >  
+        <input type="checkbox"  name="app[]" value="Viber">  
         <P >Skipe</P>
-        <input type="checkbox"  name="col_draw" >    
+        <input type="checkbox"  name="app[]" value="Skipe">    
         <h2>Социальные сети</h2> 
         <P>VK</P>
-        <input type="checkbox" name="col_draw" >  
+        <input type="checkbox" name="co[]" value="VK">  
         <P>OK</P>
-        <input type="checkbox"  name="col_draw" > 
+        <input type="checkbox"  name="co[]" value="OK"> <br>
+        <input type="submit" value="Отправить">
+    </form>
+        
     <?php
         }else{
-
+            $sum=$_POST['min']*0.3+$_POST['giga']*3.25;           
+            if(!empty($_POST['sms'])){
+                $sum+=50;
+            }
+            if(!empty($_POST['app'])){ 
+                foreach($_POST['app'] as $x){
+                if($x=='Telegram'){
+                    $sum+=30;
+                }
+                if($x=='WhatsApp'){
+                    $sum+=25;
+                }
+                if($x=='Viber'){
+                    $sum+=20;
+                }
+                if($x=='Skipe'){
+                    $sum+=15;
+                }
+            }}
+            if(!empty($_POST['co'])){ 
+                foreach($_POST['co'] as $x){
+                    if($x=='VK'){
+                        $sum+=35;
+                    }
+                    if($x=='OK'){
+                        $sum+=30;
+                    }
+            }}
+            if($sum<200){
+                echo "К оплате 200 рубы";
+            }
+            else{
+                echo "К оплате ".$sum." руб";
+            }
         }
     ?>
     </body>
