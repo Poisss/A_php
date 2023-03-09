@@ -38,7 +38,7 @@
         
     <?php
         }else{
-            $sum=$_POST['min']*0.3+$_POST['giga']*3.25;           
+            $sum=200+$_POST['min']*0.3+$_POST['giga']*3.25-3.25;           
             if(!empty($_POST['sms'])){
                 $sum+=50;
             }
@@ -66,11 +66,40 @@
                         $sum+=30;
                     }
             }}
-            if($sum<200){
-                echo "К оплате 200 рубы";
+            
+            echo "<p>Платеж ".$sum."р. на 30 дней</p><p>В пакет входит:</p><p>".$_POST['min']." Минут разговоров</p><p>".$_POST['giga']." ГБайт</p>";
+            if(!empty($_POST['sms'])){
+                echo"<p>Сообщения</p>";
             }
-            else{
-                echo "К оплате ".$sum." руб";
+            if(!empty($_POST['app'])){ 
+                echo"<p>Приложения:";
+                foreach($_POST['app'] as $x){
+                    if($x=='Telegram'){
+                        echo" Telegram";
+                    }
+                    if($x=='WhatsApp'){
+                        echo" WhatsApp";
+                    }
+                    if($x=='Viber'){
+                        echo" Viber";
+                    }
+                    if($x=='Skipe'){
+                        echo" Skipe";
+                    }
+                }
+                echo"</p>";
+            }
+            if(!empty($_POST['co'])){ 
+                echo"<p>Соц.сети:";
+                foreach($_POST['co'] as $x){
+                    if($x=='VK'){
+                        echo" VK";
+                    }
+                    if($x=='OK'){
+                        echo" OK";
+                    }
+                }
+                echo"</p>";
             }
         }
     ?>
