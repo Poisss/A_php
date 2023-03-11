@@ -28,15 +28,56 @@
             ?>
 
             <form action="" method="post">
-                    <label for="">Money:</label>
-                    <input type="number" min="1" name="money">
-                    <label for="">Time:</label>
-                    <input type="number" min="1">
+                <p>
+                    <h3>
+                        <label for="">Money:</label>
+                    </h3>
+                    <input type="number" min="10" name="money" required>
+                </p>
+                <p>
+                    <h3>
+                        <label for="">Time:</label>
+                    </h3>
+                    <input type="number" min="1" name="time" required>
+                </p>    
+                <p>
+                    <h3>
+                        <label for="">Percent:</label>
+                    </h3>
+                    <input type="radio" name="percent" value="10" required>10<br>
+                    <input type="radio" name="percent" value="20" required>20
+                </p>    
+                <p>
+                    <h3>
+                        <label for="">Vip:</label>
+                    </h3>
+                    <input type="checkbox" name="vip" value="5">
+                </p>                       
+                    <input type="submit" value='Отправить'>
             </form>
-
+            <h3>
             <?php
+                }else{
+                    echo'Ваши $'.$_POST['money'].' после '.$_POST['time'].' месяцев под ';
+                    if(empty($_POST['vip'])){
+                        echo $_POST['percent'].'% станет $';
+                        $sum=$_POST['money'];
+                        for($i=0;$i<$_POST['time'];$i++){
+                            $sum=floor(($sum/100)*(100+$_POST['percent']));
+                        }
+                        echo $sum;
+                    }else{
+                        $percsum=$_POST['percent']+$_POST['vip'];
+                        echo $percsum.'% станет $';
+                        $sum=$_POST['money'];
+                        for($i=0;$i<$_POST['time'];$i++){
+                            $sum=floor(($sum/100)*(100+$_POST['percent']+$_POST['vip']));
+                        }
+                        echo $sum;
+                    }
                 }
             ?>
+            </h3>
         </div>
     </body>
 </html>
