@@ -36,7 +36,7 @@
             $_POST['check']=null;
         }
         foreach($arr as $k){
-            echo '<div class="div">';
+            echo '<div class="div"><form action="" method="post">';
             foreach($k as $k2=>$v){
                 if($k2=='id'){
                     echo '<input type="hidden" name="id" value="'.$v.'">';
@@ -48,20 +48,24 @@
                     echo $v.'<br>';
                 }
             }
-            echo'<form action="" method="post"><input type="submit" value="Изменить запись"></form></div>';
+            echo'<input type="submit" value="Изменить запись"></form></div>';
         }  
         if(isset($_POST['id'])){
         ?> 
         <div class="window">
             <h2>Введите новые значения</h2>
             <form action="" method="$_POST">
-            <p>first name:<br><input type="text" name="f_name2"></p>
-            <p>last name:<br><input type="text" name="l_name2"></p>
-            <input type="submit" value="Изменить запись">
+                <input type="hidden" name="check1" value="1">
+                <p>first name:<br><input type="text" name="f_name2"></p>
+                <p>last name:<br><input type="text" name="l_name2"></p>
+                <input type="submit" value="Изменить запись">
             </form>
         </div>
         <?php
-        };    
+        }; 
+        if(isset($_POST['check1'])){
+            
+        } 
         ?>  
                
         
